@@ -1,0 +1,46 @@
+{
+  "name": "react-photo-grid",
+  "version": "1.0.0",
+  "description": "An editable photo grid built with React and Typescript",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "peerDependencies": {
+    "@types/node": "^20.14.10",
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0",
+    "typescript": "^5.5.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.9",
+    "@babel/preset-env": "^7.24.8",
+    "@babel/preset-react": "^7.24.7",
+    "@babel/preset-typescript": "^7.24.7",
+    "babel-loader": "^9.1.3",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.5.3",
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/DominicHart/react-photo-grid.git"
+  },
+  "keywords": [
+    "photo",
+    "grid",
+    "react",
+    "typescript"
+  ],
+  "author": "Dominic Hart",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/DominicHart/react-photo-grid/issues"
+  },
+  "homepage": "https://github.com/DominicHart/react-photo-grid#readme",
+  "dependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
+  }
+}
