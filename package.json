@@ -1,6 +1,6 @@
 {
-  "name": "react-photo-grid",
-  "version": "1.0.0",
+  "name": "react-editable-photo-grid",
+  "version": "1.0.2",
   "description": "An editable photo grid built with React and Typescript",
   "main": "index.js",
   "scripts": {
@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/DominicHart/react-photo-grid.git"
+    "url": "git+ssh://git@github.com/DominicHart/react-editable-photo-grid.git"
   },
   "keywords": [
     "photo",
@@ -38,9 +38,9 @@
   "author": "Dominic Hart",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/DominicHart/react-photo-grid/issues"
+    "url": "https://github.com/DominicHart/react-editable-photo-grid/issues"
   },
-  "homepage": "https://github.com/DominicHart/react-photo-grid#readme",
+  "homepage": "https://github.com/DominicHart/react-editable-photo-grid#readme",
   "dependencies": {
     "@types/react": "^18.3.3",
     "react": "^17.0.0 || ^18.0.0",
