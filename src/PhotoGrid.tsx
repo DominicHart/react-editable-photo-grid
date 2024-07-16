@@ -1,31 +1,32 @@
-import React, { cloneElement  } from 'react';
+import React, { cloneElement } from 'react';
 import { PhotoGridProps } from './types';
 import { sortRow, movePhotoLeft, movePhotoUp, movePhotoDown, movePhotoRight, moveRowUp, moveRowDown } from "./utils";
 import RowControls from './components/RowControls';
 import PhotoControls from './components/PhotoControls';
+import './styles.css';
 
-const PhotoGrid: React.FC = (props: PhotoGridProps) => {
-  const handleMovePhotoUp = (e: any) => {
+const PhotoGrid = (props: PhotoGridProps) => {
+  const handleMovePhotoUp = (e: React.MouseEvent<HTMLButtonElement>) => {
     movePhotoUp(e, props);
   }
 
-  const handleMovePhotoDown = (e: any) => {
+  const handleMovePhotoDown = (e: React.MouseEvent<HTMLButtonElement>) => {
     movePhotoDown(e, props);
   }
 
-  const handleMovePhotoLeft = (e: any) => {
+  const handleMovePhotoLeft = (e: React.MouseEvent<HTMLButtonElement>) => {
     movePhotoLeft(e, props);
   }
 
-  const handleMovePhotoRight = (e: any) => {
+  const handleMovePhotoRight = (e: React.MouseEvent<HTMLButtonElement>) => {
     movePhotoRight(e, props);
   }
 
-  const handleMoveRowUp = (e: any) => {
+  const handleMoveRowUp = (e: React.MouseEvent<HTMLButtonElement>) => {
     moveRowUp(e, props);
   }
 
-  const handleMoveRowDown = (e: any) => {
+  const handleMoveRowDown = (e: React.MouseEvent<HTMLButtonElement>) => {
     moveRowDown(e, props);
   }
 
@@ -37,7 +38,10 @@ const PhotoGrid: React.FC = (props: PhotoGridProps) => {
     <div className="photogrid">
       {Object.entries(props.rows).map((row, i) =>
         row[1].length &&
-        <div key={'row-' + i} className={props.isEditing ? "photo__row editing" : "photo__row"}>
+        <div 
+          key={'row-' + i} 
+          className={props.isEditing ? "photogrid--photo__row editing" : "photogrid--photo__row"}
+        >
           <>
             {props.isEditing &&
               <RowControls
@@ -48,14 +52,16 @@ const PhotoGrid: React.FC = (props: PhotoGridProps) => {
               />
             }
             {sortRow(row[1]).map((photo, i2) =>
-              <div key={'photo-' + i + i2} className="photo__column relative align-middle block relative m-0.5">
+              <div 
+                key={'photo-' + i + i2} 
+                className="photogrid--photo__column"
+              >
                 <img
                   width={photo.width}
                   height={photo.height}
                   data-id={photo.id}
                   src={"/api/photos/" + photo.thumbnail_path}
                   alt={photo.thumbnail_path}
-                  className="block md:inline-block max-w-full max-h-[700px] h-auto m-0 select-none"
                 />
                 {props.isEditing &&
                   <>

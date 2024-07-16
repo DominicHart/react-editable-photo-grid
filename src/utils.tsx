@@ -1,4 +1,5 @@
 import { PhotoItem, PhotoRows, PhotoIdAndRowKey, PhotoGridProps } from './types';
+import React from 'react';
 
 /**
  * Sorts the photos in a row by column number
@@ -81,13 +82,33 @@ const swapPhotosAround = (
 }
 
 /**
+ * Casts a the rowKey to a number if necessary
+ * @param rowKey 
+ */
+export const castRowKey = (rowKey: string | number): number => {
+  if (typeof rowKey == 'string') {
+    rowKey = parseInt(rowKey);
+  }
+
+  return rowKey;
+}
+
+/**
  * Extract the row key and photo id from the clicked element
  * @param e 
  */
-const getPhotoIdAndRowKey = (e: any): PhotoIdAndRowKey => {
+const getPhotoIdAndRowKey = (e: React.MouseEvent<HTMLButtonElement>): PhotoIdAndRowKey => {
+  const button = e.currentTarget as HTMLButtonElement,
+    id = button.dataset.id,
+    rowKey = button.dataset.row;
+
+  if (!id || !rowKey) {
+    throw new TypeError('id or row key missing from photo control');
+  }
+
   return {
-    id: e.target.dataset.id,
-    rowKey: parseInt(e.target.dataset.row)
+    id: id,
+    rowKey: parseInt(rowKey)
   }
 }
 
@@ -96,7 +117,7 @@ const getPhotoIdAndRowKey = (e: any): PhotoIdAndRowKey => {
  * @param e 
  * @param props 
  */
-export const movePhotoLeft = (e: any, props: PhotoGridProps) => {
+export const movePhotoLeft = (e: React.MouseEvent<HTMLButtonElement>, props: PhotoGridProps) => {
   e.preventDefault();
 
   const { id, rowKey } = getPhotoIdAndRowKey(e);
@@ -125,7 +146,7 @@ export const movePhotoLeft = (e: any, props: PhotoGridProps) => {
  * @param e 
  * @param props 
  */
-export const movePhotoRight = (e: any, props: PhotoGridProps) => {
+export const movePhotoRight = (e: React.MouseEvent<HTMLButtonElement>, props: PhotoGridProps) => {
   e.preventDefault();
 
   const { id, rowKey } = getPhotoIdAndRowKey(e);
@@ -185,7 +206,7 @@ const shufflePhotosForwardOneColumn = (row: PhotoItem[], start: number): PhotoIt
  * @param e 
  * @param props 
  */
-export const movePhotoUp = (e: any, props: PhotoGridProps) => {
+export const movePhotoUp = (e: React.MouseEvent<HTMLButtonElement>, props: PhotoGridProps) => {
   e.preventDefault();
   const { id, rowKey } = getPhotoIdAndRowKey(e);
 
@@ -224,7 +245,7 @@ export const movePhotoUp = (e: any, props: PhotoGridProps) => {
  * @param e 
  * @param props 
  */
-export const movePhotoDown = (e: any, props: PhotoGridProps) => {
+export const movePhotoDown = (e: React.MouseEvent<HTMLButtonElement>, props: PhotoGridProps) => {
   e.preventDefault();
   const { id, rowKey } = getPhotoIdAndRowKey(e);
 
@@ -295,16 +316,23 @@ const swapRows = (
  * @param e 
  * @param props 
  */
-export const moveRowUp = (e: any, props: PhotoGridProps) => {
+export const moveRowUp = (e: React.MouseEvent<HTMLButtonElement>, props: PhotoGridProps) => {
   e.preventDefault();
-  const rowKey = parseInt(e.target.dataset.row),
-    previousRowKey = rowKey - 1;
+  const target = e.currentTarget as HTMLButtonElement;
+  let rowKey = target.dataset.row;
+
+  if (!rowKey) {
+    throw new TypeError('row missing from row control');
+  }
+
+  const rowIndex: number = parseInt(rowKey),
+    previousRowKey = rowIndex - 1;
 
   let rowsCopy = { ...props.rows },
-    thisRow = sortRow(rowsCopy[rowKey]),
+    thisRow = sortRow(rowsCopy[rowIndex]),
     previousRow = sortRow(rowsCopy[previousRowKey]);
 
-  rowsCopy = swapRows(rowsCopy, thisRow, rowKey, previousRow, previousRowKey);
+  rowsCopy = swapRows(rowsCopy, thisRow, rowIndex, previousRow, previousRowKey);
 
   props.updateRows(rowsCopy);
   props.increaseChanges();
@@ -315,16 +343,23 @@ export const moveRowUp = (e: any, props: PhotoGridProps) => {
  * @param e 
  * @param props 
  */
-export const moveRowDown = (e: any, props: PhotoGridProps) => {
+export const moveRowDown = (e: React.MouseEvent<HTMLButtonElement>, props: PhotoGridProps) => {
   e.preventDefault();
-  const rowKey = parseInt(e.target.dataset.row),
-    nextRowKey = rowKey + 1;
+  const target = e.currentTarget as HTMLButtonElement;
+  let rowKey = target.dataset.row;
+
+  if (!rowKey) {
+    throw new TypeError('row missing from row control');
+  }
+
+  const rowIndex: number = parseInt(rowKey),
+    nextRowKey = rowIndex + 1;
 
   let rowsCopy = { ...props.rows },
-    thisRow = sortRow(rowsCopy[rowKey]),
+    thisRow = sortRow(rowsCopy[rowIndex]),
     nextRow = sortRow(rowsCopy[nextRowKey]);
 
-  rowsCopy = swapRows(rowsCopy, thisRow, rowKey, nextRow, nextRowKey);
+  rowsCopy = swapRows(rowsCopy, thisRow, rowIndex, nextRow, nextRowKey);
 
   props.updateRows(rowsCopy);
   props.increaseChanges();

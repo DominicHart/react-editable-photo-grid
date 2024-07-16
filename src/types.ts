@@ -31,18 +31,18 @@ export interface PhotoGridProps {
 }
 
 export interface PhotoControlsProps {
-  rowKey: string;
+  rowKey: string | number;
   photo: PhotoItem;
   rowCount: number,
   photoCount: number,
-  movePhotoLeft: (e: any) => void;
-  movePhotoUp: (e: any) => void;
-  movePhotoDown: (e: any) => void;
-  movePhotoRight: (e: any) => void;
+  movePhotoLeft: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  movePhotoUp: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  movePhotoDown: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  movePhotoRight: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 export interface RowControlsProps {
   rowKey: string | number;
-  moveRowUp: (e: any) => void;
-  moveRowDown: (e: any) => void;
+  moveRowUp: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  moveRowDown: (e: React.MouseEvent<HTMLButtonElement>) => void;
   rowCount: number
 }

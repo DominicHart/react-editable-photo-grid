@@ -1,19 +1,29 @@
 import React from 'react';
 import { RowControlsProps } from "../types";
+import { castRowKey } from '../utils';
+import'../styles.css';
 
-const RowControls: React.FC = (props: RowControlsProps) => {
+const RowControls = (props: RowControlsProps) => {
   return (
-    <ul className='row__controls'>
-      {props.rowKey > 1 &&
+    <ul className='photogrid--row__controls'>
+      {castRowKey(props.rowKey) > 1 &&
         <li>
-          <button className="row__control" onClick={props.moveRowUp} data-row={props.rowKey}>
+          <button 
+            className="row__control" 
+            onClick={props.moveRowUp} 
+            data-row={props.rowKey}
+          >
             &#8593;
           </button>
         </li>
       }
-      {props.rowKey < props.rowCount &&
+      {castRowKey(props.rowKey) < props.rowCount &&
         <li>
-          <button className="row__control" onClick={props.moveRowDown} data-row={props.rowKey}>
+          <button 
+            className="row__control" 
+            onClick={props.moveRowDown} 
+            data-row={props.rowKey}
+          >
             &#8595;
           </button>
         </li>
