@@ -60,7 +60,7 @@ const PhotoGrid = (props: PhotoGridProps) => {
                   width={photo.width}
                   height={photo.height}
                   data-id={photo.id}
-                  src={"/api/photos/" + photo.thumbnail_path}
+                  src={props.imageUrlPrefix + photo.thumbnail_path}
                   alt={photo.thumbnail_path}
                 />
                 {props.isEditing &&

@@ -27,6 +27,7 @@ export interface PhotoGridProps {
   isEditing: boolean;
   selectedPhotos: Array<string>;
   updateSelectedPhotos: (ids: Array<string>) => void;
+  imageUrlPrefix: string;
   photoMenu: ReactElement | undefined
 }
 
