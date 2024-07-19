@@ -88,6 +88,7 @@ const PhotoGrid = (props: PhotoGridProps) => {
                   moveRowUp={handleMoveRowUp}
                   moveRowDown={handleMoveRowDown}
                   rowCount={Object.keys(props.rows).length}
+                  buttonArrows={props.buttonArrows}
                 />
               }
               {sortRow(row[1]).map((photo, i2) =>
@@ -120,6 +121,7 @@ const PhotoGrid = (props: PhotoGridProps) => {
                         movePhotoRight={handleMovePhotoRight}
                         rowCount={Object.keys(props.rows).length}
                         photoCount={row[1].length}
+                        buttonArrows={props.buttonArrows}
                       />
                     </>
                   }

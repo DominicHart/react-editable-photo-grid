@@ -5,6 +5,13 @@ export interface PhotoIdAndRowKey {
   rowKey: number;
 }
 
+export interface ButtonArrows {
+  up: string;
+  down: string;
+  left: string;
+  right: string
+}
+
 export interface PhotoItem {
   id: string;
   column: number;
@@ -37,7 +44,8 @@ export interface PhotoGridProps {
   imageSrcProperty: imgSrcProperty;
   photoMenu: ReactElement | undefined,
   useGallery?: boolean
-  highestGalleryKey? : number
+  highestGalleryKey? : number,
+  buttonArrows?: ButtonArrows;
 }
 
 export interface PhotoControlsProps {
@@ -49,10 +57,12 @@ export interface PhotoControlsProps {
   movePhotoUp: (e: React.MouseEvent<HTMLButtonElement>) => void;
   movePhotoDown: (e: React.MouseEvent<HTMLButtonElement>) => void;
   movePhotoRight: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  buttonArrows?: ButtonArrows;
 }
 export interface RowControlsProps {
   rowKey: string | number;
   moveRowUp: (e: React.MouseEvent<HTMLButtonElement>) => void;
   moveRowDown: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  rowCount: number
+  rowCount: number;
+  buttonArrows?: ButtonArrows;
 }

@@ -52,7 +52,11 @@ selectedPhotos | Array<string> | This can be populated with photo ids for batch 
 updateSelectedPhotos | Void | A method to update the selectedPhotos prop
 changes | Number | Tracks when changes have been made (the editable part)
 increaseChanges | Void | A method to update the changes prop
-imageSrcPrefix | String | A string that represents the url prefix for each photo image src attribute. The photo 'id' property is appended to this string to generate the source.
+imageSrcPrefix | String | A string that represents the url prefix for each photo image src attribute.
+imageSrcProperty | String | Determines which photo property is used for the img src parameter.
+useGallery | Boolean | Activate the Gallery component.
+highestGalleryKey | Number | Pass this prop if you are using the gallery component. This must be the highest image column overall index.
+buttonArrows | ButtonArrows | Allows you to override the basic button arrows with custom html.
 
 ## How to Use
 

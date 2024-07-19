@@ -12,9 +12,8 @@ const RowControls = (props: RowControlsProps) => {
             className="row__control move__row__up" 
             onClick={props.moveRowUp} 
             data-row={props.rowKey}
-          >
-            &#8593;
-          </button>
+            dangerouslySetInnerHTML={{ __html: props.buttonArrows ? props.buttonArrows.up : '&#8593' }}
+          />
         </li>
       }
       {castRowKey(props.rowKey) < props.rowCount &&
@@ -23,9 +22,8 @@ const RowControls = (props: RowControlsProps) => {
             className="row__control move__row__down" 
             onClick={props.moveRowDown} 
             data-row={props.rowKey}
-          >
-            &#8595;
-          </button>
+            dangerouslySetInnerHTML={{ __html: props.buttonArrows ? props.buttonArrows.down : '&#8595' }}
+          />
         </li>
       }
     </ul>
