@@ -202,6 +202,23 @@ const shufflePhotosForwardOneColumn = (row: PhotoItem[], start: number): PhotoIt
 }
 
 /**
+ * Deletes a row index from the data if it's empty
+ */
+const deleteRowIfEmpty = (rows: PhotoRows, rowIndex: number) => {
+  if (rows[rowIndex] == undefined) {
+    Object.entries(rows).map(([index, photos]: [string, PhotoItem[]]) => {
+      const thisRowIndex = parseInt(index);
+      if (thisRowIndex > rowIndex) {
+        delete rows[thisRowIndex];
+        rows[thisRowIndex - 1] = photos;
+      }
+    })
+  }
+
+  return rows;
+}
+
+/**
  * Moves a photo to the end of the previous row
  * @param e 
  * @param props 
@@ -235,6 +252,8 @@ export const movePhotoUp = (e: React.MouseEvent<HTMLButtonElement>, props: Photo
   previousRow = addPhotoToRow(previousRow, thisPhoto, previousRow.length + 1);
   delete rowsCopy[previousRowKey];
   rowsCopy[previousRowKey] = previousRow;
+
+  rowsCopy = deleteRowIfEmpty(rowsCopy, rowKey);
 
   props.updateRows(rowsCopy);
   props.increaseChanges();
@@ -283,6 +302,8 @@ export const movePhotoDown = (e: React.MouseEvent<HTMLButtonElement>, props: Pho
   if (thisRow.length) {
     rowsCopy[rowKey] = thisRow;
   }
+
+  rowsCopy = deleteRowIfEmpty(rowsCopy, rowKey);
 
   props.updateRows(rowsCopy);
   props.increaseChanges();

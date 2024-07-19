@@ -79,6 +79,7 @@ You can add the component to your code like this:
         changes={changes}
         increaseChanges={() => setChanges(changes + 1)}
         imageSrcPrefix="/api/image"
+        imageSrcProperty="/thumbnail_path"
       />
     );
 ```
