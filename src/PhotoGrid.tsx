@@ -107,6 +107,7 @@ const PhotoGrid = (props: PhotoGridProps) => {
                   />
                   {props.isEditing &&
                     <>
+                      <p className="photo__position">R: {row[0]} | C: {photo.column}</p>
                       {props.photoMenu ?
                         cloneElement(props.photoMenu, {
                           photo: photo

@@ -329,10 +329,15 @@ export const moveRowUp = (e: React.MouseEvent<HTMLButtonElement>, props: PhotoGr
     previousRowKey = rowIndex - 1;
 
   let rowsCopy = { ...props.rows },
-    thisRow = sortRow(rowsCopy[rowIndex]),
-    previousRow = sortRow(rowsCopy[previousRowKey]);
+    thisRow = sortRow(rowsCopy[rowIndex]);
 
-  rowsCopy = swapRows(rowsCopy, thisRow, rowIndex, previousRow, previousRowKey);
+  if (!rowsCopy[previousRowKey]) {
+    rowsCopy[previousRowKey] = thisRow;
+    delete rowsCopy[rowIndex];
+  } else {
+    let previousRow = sortRow(rowsCopy[previousRowKey]);
+    rowsCopy = swapRows(rowsCopy, thisRow, rowIndex, previousRow, previousRowKey);
+  }
 
   props.updateRows(rowsCopy);
   props.increaseChanges();
@@ -356,10 +361,14 @@ export const moveRowDown = (e: React.MouseEvent<HTMLButtonElement>, props: Photo
     nextRowKey = rowIndex + 1;
 
   let rowsCopy = { ...props.rows },
-    thisRow = sortRow(rowsCopy[rowIndex]),
-    nextRow = sortRow(rowsCopy[nextRowKey]);
+    thisRow = sortRow(rowsCopy[rowIndex]);
 
-  rowsCopy = swapRows(rowsCopy, thisRow, rowIndex, nextRow, nextRowKey);
+  if (!rowsCopy[nextRowKey]) {
+    throw new TypeError('There is no next row!');
+  } else {
+    const nextRow = sortRow(rowsCopy[nextRowKey]);
+    rowsCopy = swapRows(rowsCopy, thisRow, rowIndex, nextRow, nextRowKey);
+  }
 
   props.updateRows(rowsCopy);
   props.increaseChanges();
