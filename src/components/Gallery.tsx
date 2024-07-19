@@ -33,7 +33,7 @@ const Gallery = (props: GalleryProps) => {
     e.preventDefault()
     if (props.activeKey > 1) {
       const prevKey = props.activeKey - 1;
-      props.setActiveKey(prevKey)
+      props.setActiveKey(prevKey);
       setActiveImage()
     }
   }
@@ -42,7 +42,7 @@ const Gallery = (props: GalleryProps) => {
     e.preventDefault()
     if (props.activeKey < props.highestKey) {
       const nextKey = props.activeKey + 1;
-      props.setActiveKey(nextKey)
+      props.setActiveKey(nextKey);
       setActiveImage()
     }
   }
@@ -64,7 +64,7 @@ const Gallery = (props: GalleryProps) => {
 
   const hideGallery = () => {
     setVisible(false);
-    props.setActiveKey(0);
+    props.setActiveKey(-1);
   }
 
   const disableRightClick = () => {
@@ -102,7 +102,7 @@ const Gallery = (props: GalleryProps) => {
   }
 
   useEffect(() => {
-    if (props.activeKey !== null) {
+    if (props.activeKey > -1) {
       setActiveImage()
 
       if (visible === false) {

@@ -28,6 +28,7 @@ const Photos: React.FC = () => {
         changes={changes}
         increaseChanges={() => setChanges(changes + 1)}
         imageSrcPrefix="/api/image"
+        imageSrcProperty="thumbnail_path"
       />
     );
 }

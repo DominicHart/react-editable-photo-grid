@@ -16,9 +16,9 @@ export interface PhotoItem {
 }
 
 export enum imgSrcProperty {
-  'id',
-  'thumbnail_path',
-  'image_path'
+  id = 'id',
+  thumbnail_path = 'thumbnail_path',
+  image_path = 'image_path'
 }
 
 export interface PhotoRows {
