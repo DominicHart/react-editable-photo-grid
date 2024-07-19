@@ -27,7 +27,7 @@ const Photos: React.FC = () => {
         updateSelectedPhotos={setSelectedPhotos}
         changes={changes}
         increaseChanges={() => setChanges(changes + 1)}
-        imageUrlPrefix="/api/image"
+        imageSrcPrefix="/api/image"
       />
     );
 }
@@ -51,7 +51,7 @@ selectedPhotos | Array<string> | This can be populated with photo ids for batch 
 updateSelectedPhotos | Void | A method to update the selectedPhotos prop
 changes | Number | Tracks when changes have been made (the editable part)
 increaseChanges | Void | A method to update the changes prop
-imageUrlPrefix | String | A string that represents the url prefix for each photo image src attribute. The photo 'id' property is appended to this string to generate the source.
+imageSrcPrefix | String | A string that represents the url prefix for each photo image src attribute. The photo 'id' property is appended to this string to generate the source.
 
 ## How to Use
 
@@ -73,7 +73,7 @@ You can add the component to your code like this:
         updateSelectedPhotos={setSelectedPhotos}
         changes={changes}
         increaseChanges={() => setChanges(changes + 1)}
-        imageUrlPrefix="/api/image"
+        imageSrcPrefix="/api/image"
       />
     );
 ```

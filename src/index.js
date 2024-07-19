@@ -1,4 +1,4 @@
 import PhotoGrid from './PhotoGrid';
-import { PhotoRows } from './types';
+import { PhotoRows, PhotoItem, imgSrcProperty } from './types';
 
-export { PhotoGrid, PhotoRows };
+export { PhotoGrid, PhotoRows, PhotoItem, imgSrcProperty };

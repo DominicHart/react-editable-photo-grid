@@ -1,11 +1,19 @@
-import React, { cloneElement } from 'react';
+import React, { cloneElement, useState } from 'react';
 import { PhotoGridProps } from './types';
 import { sortRow, movePhotoLeft, movePhotoUp, movePhotoDown, movePhotoRight, moveRowUp, moveRowDown } from "./utils";
 import RowControls from './components/RowControls';
 import PhotoControls from './components/PhotoControls';
+import Gallery from './components/Gallery';
 import './styles.css';
 
 const PhotoGrid = (props: PhotoGridProps) => {
+  const [activeGalleryKey, setActiveGalleryKey] = useState<number>(0);
+  let highestGalleryKey = props.highestGalleryKey;
+
+  if (!highestGalleryKey) {
+    highestGalleryKey = 0;
+  }
+
   const handleMovePhotoUp = (e: React.MouseEvent<HTMLButtonElement>) => {
     movePhotoUp(e, props);
   }
@@ -30,63 +38,82 @@ const PhotoGrid = (props: PhotoGridProps) => {
     moveRowDown(e, props);
   }
 
+  const launchGallery = (e: React.MouseEvent<HTMLImageElement>) => {
+    const imageKey = e.currentTarget.dataset.key;
+    if (!imageKey) {
+      throw new TypeError('Photo key missing');
+    }
+    setActiveGalleryKey(parseInt(imageKey));
+  }
+
   if (Object.keys(props.rows).length === 0) {
     return null;
   }
 
   return (
-    <div className="photogrid">
-      {Object.entries(props.rows).map((row, i) =>
-        row[1].length &&
-        <div 
-          key={'row-' + i} 
-          className={props.isEditing ? "photogrid--photo__row editing" : "photogrid--photo__row"}
-        >
-          <>
-            {props.isEditing &&
-              <RowControls
-                rowKey={row[0]}
-                moveRowUp={handleMoveRowUp}
-                moveRowDown={handleMoveRowDown}
-                rowCount={Object.keys(props.rows).length}
-              />
-            }
-            {sortRow(row[1]).map((photo, i2) =>
-              <div 
-                key={'photo-' + i + i2} 
-                className="photogrid--photo__column"
-              >
-                <img
-                  width={photo.width}
-                  height={photo.height}
-                  data-id={photo.id}
-                  src={props.imageUrlPrefix + photo.thumbnail_path}
-                  alt={photo.thumbnail_path}
+    <div>
+      {props.useGallery &&
+        <Gallery
+          data={props.rows}
+          activeKey={activeGalleryKey}
+          highestKey={highestGalleryKey}
+          setActiveKey={setActiveGalleryKey}
+        />
+      }
+      <div className="photogrid">
+        {Object.entries(props.rows).map((row, i) =>
+          row[1].length &&
+          <div
+            key={'row-' + i}
+            className={props.isEditing ? "photogrid--photo__row editing" : "photogrid--photo__row"}
+          >
+            <>
+              {props.isEditing &&
+                <RowControls
+                  rowKey={row[0]}
+                  moveRowUp={handleMoveRowUp}
+                  moveRowDown={handleMoveRowDown}
+                  rowCount={Object.keys(props.rows).length}
                 />
-                {props.isEditing &&
-                  <>
-                    {props.photoMenu ?
-                      cloneElement(props.photoMenu, {
-                        photo: photo
-                      })
-                      : null}
-                    <PhotoControls
-                      rowKey={row[0]}
-                      photo={photo}
-                      movePhotoDown={handleMovePhotoDown}
-                      movePhotoLeft={handleMovePhotoLeft}
-                      movePhotoUp={handleMovePhotoUp}
-                      movePhotoRight={handleMovePhotoRight}
-                      rowCount={Object.keys(props.rows).length}
-                      photoCount={row[1].length}
-                    />
-                  </>
-                }
-              </div>
-            )}
-          </>
-        </div>
-      )}
+              }
+              {sortRow(row[1]).map((photo, i2) =>
+                <div
+                  key={'photo-' + i + i2}
+                  className="photogrid--photo__column"
+                >
+                  <img
+                    width={photo.width}
+                    height={photo.height}
+                    data-id={photo.id}
+                    src={`${props.imageSrcPrefix}/${props.imageSrcProperty}`}
+                    alt={photo.thumbnail_path}
+                    onClick={props.useGallery ? launchGallery : undefined}
+                  />
+                  {props.isEditing &&
+                    <>
+                      {props.photoMenu ?
+                        cloneElement(props.photoMenu, {
+                          photo: photo
+                        })
+                        : null}
+                      <PhotoControls
+                        rowKey={row[0]}
+                        photo={photo}
+                        movePhotoDown={handleMovePhotoDown}
+                        movePhotoLeft={handleMovePhotoLeft}
+                        movePhotoUp={handleMovePhotoUp}
+                        movePhotoRight={handleMovePhotoRight}
+                        rowCount={Object.keys(props.rows).length}
+                        photoCount={row[1].length}
+                      />
+                    </>
+                  }
+                </div>
+              )}
+            </>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

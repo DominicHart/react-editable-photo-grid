@@ -10,9 +10,15 @@ export interface PhotoItem {
   column: number;
   image_path: string;
   thumbnail_path: string;
-  carousel_key: number;
+  gallery_key: number;
   width: number;
   height: number;
+}
+
+export enum imgSrcProperty {
+  'id',
+  'thumbnail_path',
+  'image_path'
 }
 
 export interface PhotoRows {
@@ -27,8 +33,11 @@ export interface PhotoGridProps {
   isEditing: boolean;
   selectedPhotos: Array<string>;
   updateSelectedPhotos: (ids: Array<string>) => void;
-  imageUrlPrefix: string;
-  photoMenu: ReactElement | undefined
+  imageSrcPrefix: string;
+  imageSrcProperty: imgSrcProperty;
+  photoMenu: ReactElement | undefined,
+  useGallery?: boolean
+  highestGalleryKey? : number
 }
 
 export interface PhotoControlsProps {
