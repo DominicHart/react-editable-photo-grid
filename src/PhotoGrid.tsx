@@ -99,6 +99,7 @@ const PhotoGrid = (props: PhotoGridProps) => {
                     width={photo.width}
                     height={photo.height}
                     data-id={photo.id}
+                    data-key={photo.gallery_key}
                     src={`${props.imageSrcPrefix}${getImageSrcProperty(photo)}`}
                     alt={photo.thumbnail_path}
                     onClick={props.useGallery ? launchGallery : undefined}
