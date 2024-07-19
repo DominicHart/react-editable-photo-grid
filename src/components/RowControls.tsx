@@ -9,7 +9,7 @@ const RowControls = (props: RowControlsProps) => {
       {castRowKey(props.rowKey) > 1 &&
         <li>
           <button 
-            className="row__control" 
+            className="row__control move__row__up" 
             onClick={props.moveRowUp} 
             data-row={props.rowKey}
           >
@@ -20,7 +20,7 @@ const RowControls = (props: RowControlsProps) => {
       {castRowKey(props.rowKey) < props.rowCount &&
         <li>
           <button 
-            className="row__control" 
+            className="row__control move__row__down" 
             onClick={props.moveRowDown} 
             data-row={props.rowKey}
           >

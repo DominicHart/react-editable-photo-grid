@@ -10,7 +10,7 @@ const PhotoControls = (props: PhotoControlsProps) => {
         <li>
           <button 
             type="button" 
-            className="photo__control" 
+            className="photo__control move__photo__left" 
             onClick={props.movePhotoLeft} 
             data-id={props.photo.id} 
             data-row={props.rowKey}
@@ -23,7 +23,7 @@ const PhotoControls = (props: PhotoControlsProps) => {
         <li>
           <button 
             type="button" 
-            className="photo__control" 
+            className="photo__control move__photo__up" 
             onClick={props.movePhotoUp} 
             data-id={props.photo.id} 
             data-row={props.rowKey}
@@ -36,7 +36,7 @@ const PhotoControls = (props: PhotoControlsProps) => {
         <li>
           <button 
             type="button" 
-            className="photo__control" 
+            className="photo__control move__photo__down" 
             onClick={props.movePhotoDown} 
             data-id={props.photo.id} 
             data-row={props.rowKey}
@@ -49,7 +49,7 @@ const PhotoControls = (props: PhotoControlsProps) => {
         <li>
           <button 
             type="button" 
-            className="photo__control" 
+            className="photo__control  move__photo__right" 
             onClick={props.movePhotoRight} 
             data-id={props.photo.id} 
             data-row={props.rowKey}
