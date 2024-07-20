@@ -1,11 +1,15 @@
 import React, { useEffect, useState, TouchEvent } from 'react'
-import { PhotoRows } from '../types';
+import { PhotoRows, imgSrcProperty, ButtonArrows } from '../types';
+import { getImageSrcProperty } from "../utils";
 
 type GalleryProps = {
   data: PhotoRows,
   activeKey: number,
   highestKey: number,
-  setActiveKey: (key: number) => void
+  setActiveKey: (key: number) => void,
+  imageSrcPrefix: string;
+  imageSrcProperty: imgSrcProperty;
+  buttonArrows?: ButtonArrows;
 }
 
 const Gallery = (props: GalleryProps) => {
@@ -14,12 +18,14 @@ const Gallery = (props: GalleryProps) => {
     [visible, setVisible] = useState<boolean>(false);
 
   const setActiveImage = () => {
-    const photos = { ...props.data }
+    const property = props.imageSrcProperty as string,
+      photos = { ...props.data };
+
     for (const [rowKey, row] of Object.entries(photos)) {
       for (const photo of row) {
         if (photo.gallery_key == props.activeKey) {
-          setActiveImageUrl(photo.image_path)
-          return
+          setActiveImageUrl(getImageSrcProperty(photo, property));
+          return;
         }
       }
     }
@@ -125,20 +131,28 @@ const Gallery = (props: GalleryProps) => {
       </div>
       <div className="custom__gallery__container">
         {props.activeKey > 1 &&
-          <button onClick={prevItem} className="previous__item">
-            <i className="fa fa-chevron-left" />
-          </button>
+          <button
+            onClick={prevItem}
+            className="previous__item"
+            dangerouslySetInnerHTML={{ __html: props.buttonArrows ? props.buttonArrows.left : '&#8592' }}
+          />
         }
         <div className="custom__gallery__images">
           {Object.keys(props.data).length ?
             <div className="custom__gallery__item active">
-              <img src={'/api/gallery/' + activeImageUrl} alt="gallery item" onContextMenu={disableRightClick} />
+              <img
+                src={`${props.imageSrcPrefix}${activeImageUrl}`}
+                alt="gallery item"
+                onContextMenu={disableRightClick}
+              />
             </div> : null}
         </div>
         {props.activeKey < props.highestKey &&
-          <button onClick={nextItem} className="next__item">
-            <i className="fa fa-chevron-right" />
-          </button>
+          <button
+            onClick={nextItem}
+            className="next__item"
+            dangerouslySetInnerHTML={{ __html: props.buttonArrows ? props.buttonArrows.right : '&#8594' }}
+          />
         }
       </div>
     </div>

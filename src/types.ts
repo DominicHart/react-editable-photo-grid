@@ -44,7 +44,7 @@ export interface PhotoGridProps {
   imageSrcProperty: imgSrcProperty;
   photoMenu: ReactElement | undefined,
   useGallery?: boolean
-  highestGalleryKey? : number,
+  gallerySrcProperty: imgSrcProperty;
   buttonArrows?: ButtonArrows;
 }
 

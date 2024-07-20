@@ -125,7 +125,7 @@
   z-index: 9001;
 }
 
-.custom__gallery .custom__gallery__container .previous__item i {
+.custom__gallery .custom__gallery__container .previous__item > * {
   pointer-events: none;
 }
 
@@ -183,7 +183,7 @@
   z-index: 9001;
 }
 
-.custom__gallery .custom__gallery__container .next__item i {
+.custom__gallery .custom__gallery__container .next__item > * {
   pointer-events: none;
 }
 

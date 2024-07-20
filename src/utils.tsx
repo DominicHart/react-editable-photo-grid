@@ -2,6 +2,36 @@ import { PhotoItem, PhotoRows, PhotoIdAndRowKey, PhotoGridProps } from './types'
 import React from 'react';
 
 /**
+ * Return the photo property to be used for the src
+ * @param photo 
+ * @param property 
+ */
+export const getImageSrcProperty = (photo: PhotoItem, property: string): string => {
+  switch (property) {
+    case 'id':
+      return photo.id;
+    case 'thumbnail_path':
+      return photo.thumbnail_path;
+    case 'image_path':
+      return photo.image_path;
+  }
+
+  return photo.image_path;
+}
+
+/**
+ * Calculates the highest gallery key
+ * @param rows 
+ */
+export const calculateHighestGalleryKey = (rows: PhotoRows): number => {
+  let highestGalleryKey = 0;
+  for (const row of Object.entries(rows)) {
+    highestGalleryKey += (row[1] as PhotoItem[]).length;
+  }
+  return highestGalleryKey;
+} 
+
+/**
  * Sorts the photos in a row by column number
  * @param row 
  */
