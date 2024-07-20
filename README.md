@@ -52,28 +52,38 @@ selectedPhotos | Array<string> | This can be populated with photo ids for batch 
 updateSelectedPhotos | Void | A method to update the selectedPhotos prop
 changes | Number | Tracks when changes have been made (the editable part)
 increaseChanges | Void | A method to update the changes prop
-imageSrcPrefix | String | A string that represents the url prefix for each photo image src attribute.
-imageSrcProperty | String | Determines which photo property is used for the img src parameter.
+imageSrcPrefix | String | A string that represents the url prefix for each photo image src attribute. This will be used for the grid and gallery.
+imageSrcProperty | String | Determines which photo property is used for the grid img src parameter.
 useGallery | Boolean | Activate the Gallery component.
-highestGalleryKey | Number | Pass this prop if you are using the gallery component. This must be the highest image column overall index.
 buttonArrows | ButtonArrows | Allows you to override the basic button arrows with custom html.
+gallerySrcProperty | String | Determines which photo property is used for the gallery image src parameter.
+galleryButtonArrows | GalleryButtonArrows | Allows you to override the gallery prev and next button arrows with custom html.
 
 ## How to Use
 
 To use the PhotoGrid component you can import it like this:
 ```tsx
-import { PhotoGrid, PhotoRows } from 'react-editable-photo-grid';
+import { PhotoGrid, PhotoRows, PhotoItem, sortPhotosIntoRows } from 'react-editable-photo-grid';
+import { getPhtos } from 'api';
 ```
 PhotoGrid represents the component and PhotoRows is the TS type for the data.
 You can add the component to your code like this:
 ```tsx
-    const [photos, setPhotos] = useState<PhotoRows>({});
+    const [photos, setPhotos] = useState<PhotoItem[]>([]),
+      [rows, setRows] = useState<PhotoRows[]>({})
+
+    const loadPhotos = (): void => {
+      const photos = await getPhotos();
+      setPhotos(photos);
+      setRows(sortPhotosIntoRows(photos));
+    }
 
     return (
       <PhotoGrid
         isEditing={true}
-        rows={photos}
-        updateRows={setPhotos}
+        photos={photos}
+        rows={rows}
+        updateRows={setRows}
         selectedPhotos={selectedPhotos}
         updateSelectedPhotos={setSelectedPhotos}
         changes={changes}

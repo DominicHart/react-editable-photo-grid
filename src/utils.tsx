@@ -2,6 +2,24 @@ import { PhotoItem, PhotoRows, PhotoIdAndRowKey, PhotoGridProps } from './types'
 import React from 'react';
 
 /**
+ * Sorts photos into rows
+ * @param photos 
+ */
+export const sortPhotosIntoRows = (photos: PhotoItem[]): PhotoRows => {
+  let rows = {} as PhotoRows;
+
+  for (const photo of photos) {
+    const rowKey = photo.row;
+    if (!rows[rowKey]) {
+      rows[rowKey] = [];
+    }
+    rows[rowKey].push(photo);
+  }
+
+  return rows;
+}
+
+/**
  * Return the photo property to be used for the src
  * @param photo 
  * @param property 
@@ -18,18 +36,6 @@ export const getImageSrcProperty = (photo: PhotoItem, property: string): string 
 
   return photo.image_path;
 }
-
-/**
- * Calculates the highest gallery key
- * @param rows 
- */
-export const calculateHighestGalleryKey = (rows: PhotoRows): number => {
-  let highestGalleryKey = 0;
-  for (const row of Object.entries(rows)) {
-    highestGalleryKey += (row[1] as PhotoItem[]).length;
-  }
-  return highestGalleryKey;
-} 
 
 /**
  * Sorts the photos in a row by column number
@@ -145,9 +151,12 @@ const getPhotoIdAndRowKey = (e: React.MouseEvent<HTMLButtonElement>): PhotoIdAnd
 /**
  * Moves a photo one column to the left
  * @param e 
- * @param props 
+ * @param props
  */
-export const movePhotoLeft = (e: React.MouseEvent<HTMLButtonElement>, props: PhotoGridProps) => {
+export const movePhotoLeft = (
+  e: React.MouseEvent<HTMLButtonElement>,
+  props: PhotoGridProps
+) => {
   e.preventDefault();
 
   const { id, rowKey } = getPhotoIdAndRowKey(e);
@@ -174,9 +183,12 @@ export const movePhotoLeft = (e: React.MouseEvent<HTMLButtonElement>, props: Pho
 /**
  * Move a photo one column to the right
  * @param e 
- * @param props 
+ * @param props
  */
-export const movePhotoRight = (e: React.MouseEvent<HTMLButtonElement>, props: PhotoGridProps) => {
+export const movePhotoRight = (
+  e: React.MouseEvent<HTMLButtonElement>,
+  props: PhotoGridProps
+) => {
   e.preventDefault();
 
   const { id, rowKey } = getPhotoIdAndRowKey(e);
@@ -251,9 +263,12 @@ const deleteRowIfEmpty = (rows: PhotoRows, rowIndex: number) => {
 /**
  * Moves a photo to the end of the previous row
  * @param e 
- * @param props 
+ * @param props
  */
-export const movePhotoUp = (e: React.MouseEvent<HTMLButtonElement>, props: PhotoGridProps) => {
+export const movePhotoUp = (
+  e: React.MouseEvent<HTMLButtonElement>,
+  props: PhotoGridProps
+): void => {
   e.preventDefault();
   const { id, rowKey } = getPhotoIdAndRowKey(e);
 
@@ -292,9 +307,12 @@ export const movePhotoUp = (e: React.MouseEvent<HTMLButtonElement>, props: Photo
 /**
  * Moves a photo to the beginning of the next row
  * @param e 
- * @param props 
+ * @param props
  */
-export const movePhotoDown = (e: React.MouseEvent<HTMLButtonElement>, props: PhotoGridProps) => {
+export const movePhotoDown = (
+  e: React.MouseEvent<HTMLButtonElement>,
+  props: PhotoGridProps
+) => {
   e.preventDefault();
   const { id, rowKey } = getPhotoIdAndRowKey(e);
 
@@ -341,11 +359,8 @@ export const movePhotoDown = (e: React.MouseEvent<HTMLButtonElement>, props: Pho
 
 /**
  * Swaps the row order
- * @param rows 
- * @param firstRow 
- * @param firstRowKey 
- * @param secondRow 
- * @param secondRowKey 
+ * @param e 
+ * @param props
  */
 const swapRows = (
   rows: PhotoRows,
@@ -363,11 +378,14 @@ const swapRows = (
 }
 
 /**
- * Move a row up
+ * Moves a row up
  * @param e 
- * @param props 
+ * @param props
  */
-export const moveRowUp = (e: React.MouseEvent<HTMLButtonElement>, props: PhotoGridProps) => {
+export const moveRowUp = (
+  e: React.MouseEvent<HTMLButtonElement>,
+  props: PhotoGridProps
+) => {
   e.preventDefault();
   const target = e.currentTarget as HTMLButtonElement;
   let rowKey = target.dataset.row;
@@ -397,9 +415,12 @@ export const moveRowUp = (e: React.MouseEvent<HTMLButtonElement>, props: PhotoGr
 /**
  * Moves a row down
  * @param e 
- * @param props 
+ * @param props
  */
-export const moveRowDown = (e: React.MouseEvent<HTMLButtonElement>, props: PhotoGridProps) => {
+export const moveRowDown = (
+  e: React.MouseEvent<HTMLButtonElement>,
+  props: PhotoGridProps
+) => {
   e.preventDefault();
   const target = e.currentTarget as HTMLButtonElement;
   let rowKey = target.dataset.row;

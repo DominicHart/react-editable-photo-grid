@@ -12,12 +12,17 @@ export interface ButtonArrows {
   right: string
 }
 
+export interface GalleryButtonArrows {
+  prev: string;
+  next: string;
+}
+
 export interface PhotoItem {
   id: string;
   column: number;
+  row: number;
   image_path: string;
   thumbnail_path: string;
-  gallery_key: number;
   width: number;
   height: number;
 }
@@ -33,6 +38,7 @@ export interface PhotoRows {
 }
 
 export interface PhotoGridProps {
+  photos: PhotoItem[];
   rows: PhotoRows;
   updateRows: (rows: PhotoRows) => void;
   changes: number;
@@ -44,8 +50,9 @@ export interface PhotoGridProps {
   imageSrcProperty: imgSrcProperty;
   photoMenu: ReactElement | undefined,
   useGallery?: boolean
-  gallerySrcProperty: imgSrcProperty;
+  gallerySrcProperty?: imgSrcProperty;
   buttonArrows?: ButtonArrows;
+  galleryButtonArrows?: GalleryButtonArrows;
 }
 
 export interface PhotoControlsProps {

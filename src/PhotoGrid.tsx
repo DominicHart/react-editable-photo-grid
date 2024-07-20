@@ -1,14 +1,13 @@
 import React, { cloneElement, useState } from 'react';
-import { PhotoGridProps, PhotoItem } from './types';
-import { sortRow, movePhotoLeft, movePhotoUp, movePhotoDown, movePhotoRight, moveRowUp, moveRowDown, getImageSrcProperty, calculateHighestGalleryKey } from "./utils";
+import { PhotoGridProps, PhotoItem, imgSrcProperty } from './types';
+import { sortRow, movePhotoLeft, movePhotoUp, movePhotoDown, movePhotoRight, moveRowUp, moveRowDown, getImageSrcProperty } from "./utils";
 import RowControls from './components/RowControls';
 import PhotoControls from './components/PhotoControls';
 import Gallery from './components/Gallery';
 import './styles.css';
 
 const PhotoGrid = (props: PhotoGridProps) => {
-  const [activeGalleryKey, setActiveGalleryKey] = useState<number>(-1),
-    highestGalleryKey = calculateHighestGalleryKey(props.rows);
+  const [activeGalleryKey, setActiveGalleryKey] = useState<number>(-1);
 
   const handleMovePhotoUp = (e: React.MouseEvent<HTMLButtonElement>) => {
     movePhotoUp(e, props);
@@ -39,12 +38,19 @@ const PhotoGrid = (props: PhotoGridProps) => {
     return getImageSrcProperty(photo, property);
   }
 
+  const getGalleryKey = (id: string) : number => {
+    return props.photos.findIndex((photoItem: PhotoItem) => photoItem.id && photoItem.id == id);
+  }
+
   const launchGallery = (e: React.MouseEvent<HTMLImageElement>) => {
-    const imageKey = e.currentTarget.dataset.key;
-    if (!imageKey) {
+    const photoId = e.currentTarget.dataset.id;
+    if (!photoId) {
       throw new TypeError('Photo key missing');
     }
-    setActiveGalleryKey(parseInt(imageKey));
+    const imageKey = getGalleryKey(photoId);
+    if (imageKey > -1) {
+      setActiveGalleryKey(imageKey);
+    }
   }
 
   if (Object.keys(props.rows).length === 0) {
@@ -55,13 +61,12 @@ const PhotoGrid = (props: PhotoGridProps) => {
     <div>
       {props.useGallery &&
         <Gallery
-          data={props.rows}
+          photos={props.photos}
           activeKey={activeGalleryKey}
-          highestKey={highestGalleryKey}
           setActiveKey={setActiveGalleryKey}
           imageSrcPrefix={props.imageSrcPrefix}
-          imageSrcProperty={props.gallerySrcProperty}
-          buttonArrows={props.buttonArrows}
+          imageSrcProperty={props.gallerySrcProperty ? props.gallerySrcProperty : ('image_path' as imgSrcProperty)}
+          buttonArrows={props.galleryButtonArrows}
         />
       }
       <div className="photogrid">
@@ -90,7 +95,6 @@ const PhotoGrid = (props: PhotoGridProps) => {
                     width={photo.width}
                     height={photo.height}
                     data-id={photo.id}
-                    data-key={photo.gallery_key}
                     src={`${props.imageSrcPrefix}${getSrcProperty(photo)}`}
                     alt={photo.thumbnail_path}
                     onClick={props.useGallery ? launchGallery : undefined}
