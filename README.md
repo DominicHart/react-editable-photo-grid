@@ -58,6 +58,7 @@ useGallery | Boolean | Activate the Gallery component.
 buttonArrows | ButtonArrows | Allows you to override the basic button arrows with custom html.
 gallerySrcProperty | String | Determines which photo property is used for the gallery image src parameter.
 galleryButtonArrows | GalleryButtonArrows | Allows you to override the gallery prev and next button arrows with custom html.
+onPhotoClick | Void | A method that receives the photo id on click
 
 ## How to Use
 

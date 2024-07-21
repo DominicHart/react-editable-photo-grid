@@ -46,6 +46,7 @@ export interface PhotoGridProps {
   isEditing: boolean;
   selectedPhotos: Array<string>;
   updateSelectedPhotos: (ids: Array<string>) => void;
+  onPhotoClick: (e: React.MouseEvent<HTMLImageElement>) => void;
   imageSrcPrefix: string;
   imageSrcProperty: imgSrcProperty;
   photoMenu: ReactElement | undefined,

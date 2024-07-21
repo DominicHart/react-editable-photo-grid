@@ -42,16 +42,23 @@ const PhotoGrid = (props: PhotoGridProps) => {
     return props.photos.findIndex((photoItem: PhotoItem) => photoItem.id && photoItem.id == id);
   }
 
-  const launchGallery = (e: React.MouseEvent<HTMLImageElement>) => {
+  const onPhotoClick = (e: React.MouseEvent<HTMLImageElement>): void => {
     const photoId = e.currentTarget.dataset.id;
     if (!photoId) {
-      throw new TypeError('Photo key missing');
+      throw new TypeError('Photo id missing');
     }
-    const imageKey = getGalleryKey(photoId);
-    if (imageKey > -1) {
-      setActiveGalleryKey(imageKey);
+
+    if (props.onPhotoClick) {
+      props.onPhotoClick(e);
     }
-  }
+
+    if (props.useGallery) {
+      const imageKey = getGalleryKey(photoId);
+      if (imageKey > -1) {
+        setActiveGalleryKey(imageKey);
+      }
+    }
+  } 
 
   if (Object.keys(props.rows).length === 0) {
     return null;
@@ -97,7 +104,7 @@ const PhotoGrid = (props: PhotoGridProps) => {
                     data-id={photo.id}
                     src={`${props.imageSrcPrefix}${getSrcProperty(photo)}`}
                     alt={photo.thumbnail_path}
-                    onClick={props.useGallery ? launchGallery : undefined}
+                    onClick={onPhotoClick}
                     className={props.useGallery ? "cursor-pointer" : 'cursor-default'}
                   />
                   {props.isEditing &&
