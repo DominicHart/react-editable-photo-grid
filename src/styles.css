@@ -1,3 +1,19 @@
+.photogrid--checkbox {
+    background: white;
+    border: 2px solid white;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+}
+
+.photogrid--checkbox.active {
+    background: #333;
+}
+
 .photogrid {
     padding: 0 0.125rem;
 }

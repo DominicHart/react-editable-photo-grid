@@ -1,6 +1,6 @@
 {
   "name": "react-editable-photo-grid",
-  "version": "1.4.3",
+  "version": "1.4.7",
   "description": "An editable photo grid built with React and Typescript",
   "main": "dist/index.js",
   "files": [
