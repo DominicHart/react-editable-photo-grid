@@ -1,0 +1,29 @@
+[
+    {
+        "id": "3cc6ea28-a9d3-41ff-b3c3-46d9562a91fc",
+        "column": 1,
+        "row": 1,
+        "image_path": "photo_1_large.jpg",
+        "thumbnail_path": "photo_1_thumbnail.jpg",
+        "width": 1050,
+        "height": 700
+    },
+    {
+        "id": "546a65d7-297f-49dd-bb00-e4fd60dd4142",
+        "column": 2,
+        "row": 1,
+        "image_path": "photo_2_large.jpg",
+        "thumbnail_path": "photo_2_thumbnail.jpg",
+        "width": 999,
+        "height": 700
+    },
+    {
+        "id": "5850abd4-9459-4bac-8091-4a1e2ce70bc3",
+        "column": 3,
+        "row": 1,
+        "image_path": "photo_3_large.jpg",
+        "thumbnail_path": "photo_3__thumbnail.jpg",
+        "width": 1050,
+        "height": 700
+    }
+]

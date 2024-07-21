@@ -400,9 +400,9 @@ export const moveRowUp = (
   let rowsCopy = { ...props.rows },
     thisRow = sortRow(rowsCopy[rowIndex]);
 
-  if (!rowsCopy[previousRowKey]) {
-    rowsCopy[previousRowKey] = thisRow;
+  if (rowsCopy[previousRowKey] == undefined) {
     delete rowsCopy[rowIndex];
+    rowsCopy[previousRowKey] = thisRow;
   } else {
     let previousRow = sortRow(rowsCopy[previousRowKey]);
     rowsCopy = swapRows(rowsCopy, thisRow, rowIndex, previousRow, previousRowKey);
