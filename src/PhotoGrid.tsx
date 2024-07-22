@@ -74,6 +74,7 @@ const PhotoGrid = (props: PhotoGridProps) => {
           imageSrcPrefix={props.imageSrcPrefix}
           imageSrcProperty={props.gallerySrcProperty ? props.gallerySrcProperty : ('image_path' as imgSrcProperty)}
           buttonArrows={props.galleryButtonArrows}
+          onGallerySwipe={props.onGallerySwipe}
         />
       }
       <div className="photogrid">

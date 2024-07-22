@@ -59,6 +59,7 @@ buttonArrows | ButtonArrows | Allows you to override the basic button arrows wit
 gallerySrcProperty | String | Determines which photo property is used for the gallery image src parameter.
 galleryButtonArrows | GalleryButtonArrows | Allows you to override the gallery prev and next button arrows with custom html.
 onPhotoClick | Void | A method that receives the photo id on click
+onGallerySwipe | Void | A method that receives a photo object when the gallery is swiped
 
 ## How to Use
 

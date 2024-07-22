@@ -9,6 +9,7 @@ type GalleryProps = {
   imageSrcPrefix: string;
   imageSrcProperty: imgSrcProperty;
   buttonArrows?: GalleryButtonArrows;
+  onGallerySwipe?: (photo: PhotoItem) => void;
 }
 
 const Gallery = (props: GalleryProps) => {
@@ -24,13 +25,24 @@ const Gallery = (props: GalleryProps) => {
     setVisible(true);
   }
 
+  const handleSwipe = () => {
+    if (props.onGallerySwipe) {
+      const photoKey = props.activeKey,
+        photo: PhotoItem = props.photos[photoKey];
+
+      if (photo) {
+        props.onGallerySwipe(photo);
+      }
+    }
+  }
+
   const shouldRenderImage = (index: number) => {
     const key = props.activeKey;
     let validIndexes = [key];
 
     if (key > 0) {
-      validIndexes.push(key -1);
-    } 
+      validIndexes.push(key - 1);
+    }
 
     if (key < props.photos.length - 1) {
       validIndexes.push(key + 1);
@@ -43,6 +55,7 @@ const Gallery = (props: GalleryProps) => {
     e.preventDefault()
     if (props.activeKey > 0) {
       props.setActiveKey(props.activeKey - 1);
+      handleSwipe();
     }
   }
 
@@ -50,6 +63,7 @@ const Gallery = (props: GalleryProps) => {
     e.preventDefault()
     if (props.activeKey < props.photos.length - 1) {
       props.setActiveKey(props.activeKey + 1);
+      handleSwipe();
     }
   }
 
@@ -63,6 +77,7 @@ const Gallery = (props: GalleryProps) => {
         props.setActiveKey(props.activeKey - 1);
       }
     }
+    handleSwipe();
   }
 
   const hideGallery = () => {
@@ -99,6 +114,7 @@ const Gallery = (props: GalleryProps) => {
       }
     }
 
+    handleSwipe();
     setTouchPosition(null);
   }
 
