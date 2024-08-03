@@ -73,6 +73,7 @@ const Photos = () => {
         imageSrcProperty="thumbnail_path"
         useGallery={true}
         gallerySrcProperty="image_path"
+        galleryType="scroll"
       />
     </div>
   );

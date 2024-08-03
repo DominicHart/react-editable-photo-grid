@@ -1,6 +1,6 @@
 import React, { useEffect, useState, TouchEvent } from 'react'
 import { imgSrcProperty, GalleryButtonArrows, PhotoItem } from '../types';
-import { getImageSrcProperty, sortRow } from "../utils";
+import { getImageSrcProperty, photoHasDetails } from "../utils";
 
 type GalleryProps = {
   photos: PhotoItem[],
@@ -12,7 +12,7 @@ type GalleryProps = {
   onGallerySwipe?: (photo: PhotoItem) => void;
 }
 
-const Gallery = (props: GalleryProps) => {
+const NonScrollGallery = (props: GalleryProps) => {
   const [touchPosition, setTouchPosition] = useState<number | null>(null),
     [visible, setVisible] = useState<boolean>(false);
 
@@ -160,6 +160,16 @@ const Gallery = (props: GalleryProps) => {
                   alt="gallery item"
                   onContextMenu={disableRightClick}
                 />
+                {photoHasDetails(photo) === true && (
+                  <div className="custom__gallery__photo__overlay">
+                    {photo.name != undefined && photo.name !== '' && (
+                      <h4>{photo.name}</h4>
+                    )}
+                    {photo.description != undefined && photo.description !== '' && (
+                      <p>{photo.description}</p>
+                    )}
+                  </div>
+                )}
               </div>
             )}
         </div>
@@ -175,4 +185,4 @@ const Gallery = (props: GalleryProps) => {
   )
 }
 
-export default Gallery;
+export default NonScrollGallery;

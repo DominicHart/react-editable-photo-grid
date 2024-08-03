@@ -1,9 +1,10 @@
 import React, { cloneElement, useState } from 'react';
 import { PhotoGridProps, PhotoItem, imgSrcProperty } from './types';
-import { sortRow, movePhotoLeft, movePhotoUp, movePhotoDown, movePhotoRight, moveRowUp, moveRowDown, getImageSrcProperty } from "./utils";
+import { sortRow, movePhotoLeft, movePhotoUp, movePhotoDown, movePhotoRight, moveRowUp, moveRowDown, getImageSrcProperty, photoHasDetails } from "./utils";
 import RowControls from './components/RowControls';
 import PhotoControls from './components/PhotoControls';
-import Gallery from './components/Gallery';
+import ScrollGallery from './components/ScrollGallery';
+import NonScrollGallery from './components/NonScrollGallery';
 import './styles.css';
 
 const PhotoGrid = (props: PhotoGridProps) => {
@@ -38,7 +39,7 @@ const PhotoGrid = (props: PhotoGridProps) => {
     return getImageSrcProperty(photo, property);
   }
 
-  const getGalleryKey = (id: string) : number => {
+  const getGalleryKey = (id: string): number => {
     return props.photos.findIndex((photoItem: PhotoItem) => photoItem.id && photoItem.id == id);
   }
 
@@ -58,7 +59,7 @@ const PhotoGrid = (props: PhotoGridProps) => {
         setActiveGalleryKey(imageKey);
       }
     }
-  } 
+  }
 
   if (Object.keys(props.rows).length === 0) {
     return null;
@@ -67,7 +68,17 @@ const PhotoGrid = (props: PhotoGridProps) => {
   return (
     <div>
       {props.useGallery &&
-        <Gallery
+        props.galleryType === 'scroll' ?
+        <ScrollGallery
+          photos={props.photos}
+          activeKey={activeGalleryKey}
+          setActiveKey={setActiveGalleryKey}
+          imageSrcPrefix={props.imageSrcPrefix}
+          imageSrcProperty={props.gallerySrcProperty ? props.gallerySrcProperty : ('image_path' as imgSrcProperty)}
+          buttonArrows={props.galleryButtonArrows}
+          onGallerySwipe={props.onGallerySwipe}
+        />
+        : <NonScrollGallery
           photos={props.photos}
           activeKey={activeGalleryKey}
           setActiveKey={setActiveGalleryKey}
@@ -108,6 +119,17 @@ const PhotoGrid = (props: PhotoGridProps) => {
                     onClick={onPhotoClick}
                     className={props.useGallery ? "cursor-pointer" : 'cursor-default'}
                   />
+
+                  {!props.isEditing && photoHasDetails(photo) === true && (
+                    <div className="photogrid--photo_overlay">
+                      {photo.name != undefined && photo.name !== '' && (
+                        <h4>{photo.name}</h4>
+                      )}
+                      {photo.description != undefined && photo.description !== '' && (
+                        <p>{photo.description}</p>
+                      )}
+                    </div>
+                  )}
                   {props.isEditing &&
                     <>
                       <p className="photo__position">R: {row[0]} | C: {photo.column}</p>

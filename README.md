@@ -60,6 +60,7 @@ gallerySrcProperty | String | Determines which photo property is used for the ga
 galleryButtonArrows | GalleryButtonArrows | Allows you to override the gallery prev and next button arrows with custom html.
 onPhotoClick | Void | A method that receives the photo id on click
 onGallerySwipe | Void | A method that receives a photo object when the gallery is swiped
+galleryType | String | Determines if the legacy gallery or the scroll gallery (beta) is to be used
 
 ## How to Use
 

@@ -25,6 +25,8 @@ export interface PhotoItem {
   thumbnail_path: string;
   width: number;
   height: number;
+  name?: string;
+  description?: string;
 }
 
 export enum imgSrcProperty {
@@ -32,11 +34,9 @@ export enum imgSrcProperty {
   thumbnail_path = 'thumbnail_path',
   image_path = 'image_path'
 }
-
 export interface PhotoRows {
   [key: number]: PhotoItem[];
 }
-
 export interface PhotoGridProps {
   photos: PhotoItem[];
   rows: PhotoRows;
@@ -55,6 +55,7 @@ export interface PhotoGridProps {
   onGallerySwipe?: (photo: PhotoItem) => void;
   buttonArrows?: ButtonArrows;
   galleryButtonArrows?: GalleryButtonArrows;
+  galleryType: string
 }
 
 export interface PhotoControlsProps {

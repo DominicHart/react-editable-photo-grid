@@ -2,6 +2,21 @@ import { PhotoItem, PhotoRows, PhotoIdAndRowKey, PhotoGridProps } from './types'
 import React from 'react';
 
 /**
+ * Returns true if a photo has details
+ * @param photo 
+ */
+export const photoHasDetails = (photo: PhotoItem): boolean => {
+  if (
+    (photo.name != undefined && photo.name !== '') 
+    || (photo.description != undefined && photo.description !== '')
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
+/**
  * Sorts photos into rows
  * @param photos 
  */
