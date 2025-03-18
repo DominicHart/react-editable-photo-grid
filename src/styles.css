@@ -83,6 +83,14 @@
     margin: 0.125rem;
 }
 
+.photogrid--photo__actions {
+    display: none;
+}
+
+.photogrid--photo__column:hover .photogrid--photo__actions {
+    display: flex;
+}
+
 .photogrid--photo_overlay, .photogrid__gallery_item__overlay {
     min-height: 0;
     display: none;

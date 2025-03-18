@@ -185,9 +185,9 @@ const PhotoActions: React.FC<Props> = ({ photo, addToBasket }) => {
     }
 
     return (
-        <div className="flex absolute z-20 bottom-1 left-1/2 -translate-x-1/2">
-            <ul className="block">
-                <li className="inline-block">
+        <div className="photogrid--photo__actions">
+            <ul>
+                <li>
                     <button 
                         type="button" 
                         onClick={addPhotoToBasket}

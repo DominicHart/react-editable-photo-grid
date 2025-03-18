@@ -137,7 +137,7 @@ const PhotoGrid = (props: PhotoGridProps) => {
                         cloneElement(props.photoMenu, {
                           photo: photo
                         })
-                        : null}
+                      : null}
                       <PhotoControls
                         rowKey={row[0]}
                         photo={photo}
