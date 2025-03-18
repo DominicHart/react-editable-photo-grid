@@ -1,18 +1,18 @@
-import { ReactElement } from "react";
+import React, { ReactElement } from "react";
 
-export interface PhotoIdAndRowKey {
+export type PhotoIdAndRowKey = {
   id: string;
   rowKey: number;
 }
 
-export interface ButtonArrows {
+export type ButtonArrows = {
   up: string;
   down: string;
   left: string;
   right: string
 }
 
-export interface GalleryButtonArrows {
+export type GalleryButtonArrows = {
   prev: string;
   next: string;
 }
@@ -34,31 +34,34 @@ export enum imgSrcProperty {
   thumbnail_path = 'thumbnail_path',
   image_path = 'image_path'
 }
-export interface PhotoRows {
+
+export type PhotoRows = {
   [key: number]: PhotoItem[];
 }
-export interface PhotoGridProps {
+
+export type PhotoGridProps = {
   photos: PhotoItem[];
   rows: PhotoRows;
-  updateRows: (rows: PhotoRows) => void;
   changes: number;
-  increaseChanges: () => void;
   isEditing: boolean;
   selectedPhotos: Array<string>;
-  updateSelectedPhotos: (ids: Array<string>) => void;
-  onPhotoClick?: (e: React.MouseEvent<HTMLImageElement>) => void;
   imageSrcPrefix: string;
   imageSrcProperty: imgSrcProperty;
-  photoMenu: ReactElement | undefined,
-  useGallery?: boolean
+  photoMenu: ReactElement | undefined;
+  photoActions: ReactElement| undefined;
+  galleryType: string;
+  useGallery?: boolean;
   gallerySrcProperty?: imgSrcProperty;
-  onGallerySwipe?: (photo: PhotoItem) => void;
   buttonArrows?: ButtonArrows;
   galleryButtonArrows?: GalleryButtonArrows;
-  galleryType: string
+  updateRows: (rows: PhotoRows) => void;
+  increaseChanges: () => void;
+  onGallerySwipe?: (photo: PhotoItem) => void;
+  updateSelectedPhotos: (ids: Array<string>) => void;
+  onPhotoClick?: (e: React.MouseEvent<HTMLImageElement>) => void;
 }
 
-export interface PhotoControlsProps {
+export type PhotoControlsProps = {
   rowKey: string | number;
   photo: PhotoItem;
   rowCount: number,
@@ -69,7 +72,8 @@ export interface PhotoControlsProps {
   movePhotoRight: (e: React.MouseEvent<HTMLButtonElement>) => void;
   buttonArrows?: ButtonArrows;
 }
-export interface RowControlsProps {
+
+export type RowControlsProps = {
   rowKey: string | number;
   moveRowUp: (e: React.MouseEvent<HTMLButtonElement>) => void;
   moveRowDown: (e: React.MouseEvent<HTMLButtonElement>) => void;

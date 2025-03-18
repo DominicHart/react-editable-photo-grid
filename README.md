@@ -61,6 +61,8 @@ galleryButtonArrows | GalleryButtonArrows | Allows you to override the gallery p
 onPhotoClick | Void | A method that receives the photo id on click
 onGallerySwipe | Void | A method that receives a photo object when the gallery is swiped
 galleryType | String | Determines if the legacy gallery or the scroll gallery (beta) is to be used
+photoMenu | ReactElement | Accepts any React component to appear on hover when in edit mode
+photoActions | ReactElement | Accepts any React component to appear on hover when not in edit mode
 
 ## How to Use
 
@@ -168,7 +170,46 @@ And here is how you can prepare it for the grid:
   />
 ```
 
-You can then pass photoMenu to the grid as a prop. See the sample component for more details
+You can then pass photoMenu to the grid as a prop. See the sample component for more details.
+
+### Passing custom photo actions
+You can add actions to the grid by passing a component as the photoActions prop. The grid will clone this prop and add it to each photo. There isn't a set format that a menu has to be but here is an example:
+
+```tsx
+const PhotoActions: React.FC<Props> = ({ photo, addToBasket }) => {
+    const addPhotoToBasket = (e: React.MouseEvent<HTMLButtonElement>): void => {
+        e.preventDefault();
+        const id = e.currentTarget.dataset.id||undefined;
+        if (!id) return;
+        addToBasket(id);
+    }
+
+    return (
+        <div className="flex absolute z-20 bottom-1 left-1/2 -translate-x-1/2">
+            <ul className="block">
+                <li className="inline-block">
+                    <button 
+                        type="button" 
+                        onClick={addPhotoToBasket}
+                    >
+                        Buy
+                    </button>
+                </li>
+            </ul>
+        </div>
+    );
+}
+```
+
+And here is how you can prepare it for the grid:
+
+```tsx
+  const photoActions = <PhotoActions
+    addToBasket={addToBasket}
+  />
+```
+
+You can then pass photoActions to the grid as a prop. See the sample component for more details.
 
 ### Using the gallery
 

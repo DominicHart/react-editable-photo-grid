@@ -96,15 +96,15 @@ const PhotoGrid = (props: PhotoGridProps) => {
             className={props.isEditing ? "photogrid--photo__row editing" : "photogrid--photo__row"}
           >
             <>
-              {props.isEditing &&
+              {props.isEditing && (
                 <RowControls
-                  rowKey={row[0]}
-                  moveRowUp={handleMoveRowUp}
-                  moveRowDown={handleMoveRowDown}
-                  rowCount={Object.keys(props.rows).length}
-                  buttonArrows={props.buttonArrows}
-                />
-              }
+                rowKey={row[0]}
+                moveRowUp={handleMoveRowUp}
+                moveRowDown={handleMoveRowDown}
+                rowCount={Object.keys(props.rows).length}
+                buttonArrows={props.buttonArrows}
+              />
+              )}
               {sortRow(row[1]).map((photo, i2) =>
                 <div
                   key={'photo-' + i + i2}
@@ -130,7 +130,7 @@ const PhotoGrid = (props: PhotoGridProps) => {
                       )}
                     </div>
                   )}
-                  {props.isEditing &&
+                  {props.isEditing ? (
                     <>
                       <p className="photo__position">R: {row[0]} | C: {photo.column}</p>
                       {props.photoMenu ?
@@ -150,7 +150,11 @@ const PhotoGrid = (props: PhotoGridProps) => {
                         buttonArrows={props.buttonArrows}
                       />
                     </>
-                  }
+                  ) : props.photoActions ? (
+                    cloneElement(props.photoActions, {
+                      photo: photo
+                    })
+                  ) : null}
                 </div>
               )}
             </>
