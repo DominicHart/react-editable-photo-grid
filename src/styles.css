@@ -85,6 +85,11 @@
 
 .photogrid--photo__actions {
     display: none;
+    position: absolute;
+    z-index: 20;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .photogrid--photo__column:hover .photogrid--photo__actions {
