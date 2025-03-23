@@ -27,7 +27,7 @@
     z-index: 20;
 }
 
-.photogrid--row__controls > li {
+.photogrid--row__controls>li {
     display: block;
 }
 
@@ -41,19 +41,20 @@
     text-align: center;
 }
 
-.photogrid--photo__controls > li {
+.photogrid--photo__controls>li {
     display: inline-block;
 }
 
-.photogrid--photo__controls > li + li {
+.photogrid--photo__controls>li+li {
     margin-left: 0.25rem;
 }
 
-.photogrid--row__controls > li + li {
+.photogrid--row__controls>li+li {
     margin-top: 0.25rem;
 }
 
-.photogrid--photo__controls .photo__control, .photogrid--row__controls .row__control {
+.photogrid--photo__controls .photo__control,
+.photogrid--row__controls .row__control {
     width: 36px;
     height: 36px;
     display: block;
@@ -96,7 +97,8 @@
     display: flex;
 }
 
-.photogrid--photo_overlay, .photogrid__gallery_item__overlay {
+.photogrid--photo_overlay,
+.photogrid__gallery_item__overlay {
     min-height: 0;
     display: none;
     position: absolute;
@@ -109,20 +111,22 @@
     z-index: 200;
 }
 
-.photogrid--photo_overlay h4, .photogrid__gallery_item__overlay h4 {
+.photogrid--photo_overlay h4,
+.photogrid__gallery_item__overlay h4 {
     font-size: 14px;
     font-weight: 600;
     margin: 0;
     padding: 0;
 }
 
-.photogrid--photo_overlay p, .photogrid__gallery_item__overlay p {
+.photogrid--photo_overlay p,
+.photogrid__gallery_item__overlay p {
     margin: 7px 0 0 0;
     padding: 0;
     font-size: 12px;
 }
 
-.photogrid--photo__column > .photo__position {
+.photogrid--photo__column>.photo__position {
     position: absolute;
     top: 0;
     z-index: 20;
@@ -133,7 +137,7 @@
     padding: 0.1rem;
 }
 
-.photogrid--photo__column > img {
+.photogrid--photo__column>img {
     display: block;
     max-width: 100%;
     max-height: 750px;
@@ -161,109 +165,110 @@
 }
 
 .custom__gallery .custom__gallery__container {
-  vertical-align: middle;
-  display: block;
-  height: 100%;
-  margin: 0 auto;
-  position: relative;
+    vertical-align: middle;
+    display: block;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
 }
 
 .custom__gallery .custom__gallery__container .previous__item {
-  display: none;
-  height: 50px;
-  width: 50px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: white;
-  font-size: 2rem;
-  left: 50px;
-  cursor: pointer;
-  z-index: 9001;
+    display: none;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    left: 50px;
+    cursor: pointer;
+    z-index: 9001;
 }
 
-.custom__gallery .custom__gallery__container .previous__item > * {
-  pointer-events: none;
+.custom__gallery .custom__gallery__container .previous__item>* {
+    pointer-events: none;
 }
 
 .custom__gallery .custom__gallery__container .custom__gallery__images {
-  height: 100vh;
-  text-align: center;
+    height: 100vh;
+    text-align: center;
 }
 
 .custom__gallery .custom__gallery__container .custom__gallery__images .custom__gallery__item {
-  position: relative;
-  height: 100vh;
-  display: none;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
+    position: relative;
+    height: 100vh;
+    display: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
 }
 
 .custom__gallery .custom__gallery__container .custom__gallery__images .custom__gallery__item.active {
-  display: block;
+    display: block;
 }
 
 .custom__gallery .custom__gallery__container .custom__gallery__images .custom__gallery__item img {
-  display: block;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  max-width: 100%;
-  height: auto;
-  width: 100%;
-  margin: 0 auto;
-  line-height: 1;
-  vertical-align: middle;
-  outline: 0;
+    display: block;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+    margin: 0 auto;
+    line-height: 1;
+    vertical-align: middle;
+    outline: 0;
 }
 
 .custom__gallery .custom__gallery__container .custom__gallery__images .custom__gallery__item p {
-  color: white;
-  margin-top: 12px;
+    color: white;
+    margin-top: 12px;
 }
 
 .custom__gallery .custom__gallery__container .next__item {
-  display: none;
-  height: 50px;
-  width: 50px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: white;
-  font-size: 2rem;
-  right: 50px;
-  cursor: pointer;
-  z-index: 9001;
+    display: none;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    right: 50px;
+    cursor: pointer;
+    z-index: 9001;
 }
 
-.custom__gallery .custom__gallery__container .next__item > * {
-  pointer-events: none;
+.custom__gallery .custom__gallery__container .next__item>* {
+    pointer-events: none;
 }
 
 .custom__gallery .close__gallery {
-  position: absolute;
-  z-index: 9999;
-  right: 0;
-  background: none;
-  color: white;
-  border: none;
-  font-size: 3rem;
-  float: right;
-  font-weight: 300;
-  width: 73px;
-  height: 73px;
-  overflow: hidden;
-  text-decoration: none;
+    position: absolute;
+    z-index: 9999;
+    right: 0;
+    background: none;
+    color: white;
+    border: none;
+    font-size: 3rem;
+    float: right;
+    font-weight: 300;
+    width: 73px;
+    height: 73px;
+    overflow: hidden;
+    text-decoration: none;
 }
 
-.custom__gallery .close__gallery:active, .custom__gallery .close__gallery:focus {
-  text-decoration: none;
+.custom__gallery .close__gallery:active,
+.custom__gallery .close__gallery:focus {
+    text-decoration: none;
 }
 
 
@@ -319,11 +324,11 @@
     flex-shrink: 0;
 }
 
-.photogrid__gallery_item +.photogrid__gallery_item {
+.photogrid__gallery_item+.photogrid__gallery_item {
     margin-left: 1rem;
 }
 
-.photogrid__gallery_item > img {
+.photogrid__gallery_item>img {
     width: 100%;
     max-width: 100%;
     height: auto;
@@ -340,7 +345,7 @@
     padding-right: 0.5rem;
 }
 
-.photogrid__gallery__hide > button {
+.photogrid__gallery__hide>button {
     color: white;
     font-weight: 300;
     width: 73px;
@@ -350,7 +355,8 @@
     border: none;
 }
 
-.photogrid__prev, .photogrid__next {
+.photogrid__prev,
+.photogrid__next {
     display: none;
     width: auto;
     position: absolute;
@@ -361,7 +367,8 @@
     font-size: 2rem;
 }
 
-.photogrid__prev > button > *, .photogrid__next > button > * {
+.photogrid__prev>button>*,
+.photogrid__next>button>* {
     pointer-events: none;
 }
 
@@ -374,7 +381,9 @@
 }
 
 @media only screen and (min-width: 768px) {
-    .custom__gallery .custom__gallery__container .previous__item, .custom__gallery .custom__gallery__container .next__item {
+
+    .custom__gallery .custom__gallery__container .previous__item,
+    .custom__gallery .custom__gallery__container .next__item {
         display: inline-block;
     }
 
@@ -383,28 +392,41 @@
         flex: 1 1 auto;
     }
 
-    .photogrid--photo__column > img {
+    .photogrid--photo__column:first-child {
+        margin-left: 0;
+    }
+
+    .photogrid--photo__column:last-child {
+        margin-right: 0;
+    }
+
+    .photogrid--photo__column>img {
         display: inline-block;
     }
 }
 
 @media only screen and (min-width: 1024px) {
-    .photogrid__prev, .photogrid__next {
+
+    .photogrid__prev,
+    .photogrid__next {
         display: block;
     }
 }
 
 
 @media only screen and (min-width: 1280px) {
-    .custom__gallery .custom__gallery__container .custom__gallery__images .custom__gallery__item img:hover + .custom__gallery__photo__overlay {
+    .custom__gallery .custom__gallery__container .custom__gallery__images .custom__gallery__item img:hover+.custom__gallery__photo__overlay {
         display: block;
     }
-    .photogrid--photo__column img:hover + .photogrid--photo_overlay {
+
+    .photogrid--photo__column img:hover+.photogrid--photo_overlay {
         display: block;
     }
-    .photogrid__gallery_item > img:hover .photogrid__gallery_item__overlay {
+
+    .photogrid__gallery_item>img:hover .photogrid__gallery_item__overlay {
         display: block;
     }
+
     .photogrid__gallery_scrollcontainer {
         width: 91.6%;
     }
