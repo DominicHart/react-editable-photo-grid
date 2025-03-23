@@ -1,6 +1,6 @@
 import React, { useEffect, useState, TouchEvent } from 'react'
 import { imgSrcProperty, GalleryButtonArrows, PhotoItem } from '../types';
-import { getImageSrcProperty, photoHasDetails } from "../utils";
+import { disableRightClick, getImageSrcProperty, photoHasDetails } from "../utils";
 
 type GalleryProps = {
   photos: PhotoItem[],
@@ -83,10 +83,6 @@ const NonScrollGallery = (props: GalleryProps) => {
   const hideGallery = () => {
     setVisible(false);
     props.setActiveKey(-1);
-  }
-
-  const disableRightClick = () => {
-    return false;
   }
 
   const handleTouchStart = (e: TouchEvent<HTMLDivElement>) => {

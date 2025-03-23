@@ -7,7 +7,7 @@ import React from 'react';
  */
 export const photoHasDetails = (photo: PhotoItem): boolean => {
   if (
-    (photo.name != undefined && photo.name !== '') 
+    (photo.name != undefined && photo.name !== '')
     || (photo.description != undefined && photo.description !== '')
   ) {
     return true;
@@ -459,4 +459,9 @@ export const moveRowDown = (
 
   props.updateRows(rowsCopy);
   props.increaseChanges();
+}
+
+export const disableRightClick = (e: React.MouseEvent<HTMLImageElement>) => {
+  e.preventDefault();
+  return false;
 }

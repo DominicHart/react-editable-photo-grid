@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { imgSrcProperty, GalleryButtonArrows, PhotoItem } from '../types';
-import { photoHasDetails } from "../utils";
+import { disableRightClick, photoHasDetails } from "../utils";
 import debounce from 'lodash.debounce';
 
 type Props = {
@@ -62,11 +62,6 @@ const ScrollGallery: React.FC<Props> = ({ photos, imageSrcPrefix, imageSrcProper
     }, 50),
     []
   );
-
-  const disableRightClick = (e: React.MouseEvent<HTMLImageElement>) => {
-    e.preventDefault();
-    return false;
-  }
 
   const scrollLeft = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

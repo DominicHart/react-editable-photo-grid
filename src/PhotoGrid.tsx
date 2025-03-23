@@ -1,6 +1,6 @@
 import React, { cloneElement, useState } from 'react';
 import { PhotoGridProps, PhotoItem, imgSrcProperty } from './types';
-import { sortRow, movePhotoLeft, movePhotoUp, movePhotoDown, movePhotoRight, moveRowUp, moveRowDown, getImageSrcProperty, photoHasDetails } from "./utils";
+import { sortRow, movePhotoLeft, movePhotoUp, movePhotoDown, movePhotoRight, moveRowUp, moveRowDown, getImageSrcProperty, photoHasDetails, disableRightClick } from "./utils";
 import RowControls from './components/RowControls';
 import PhotoControls from './components/PhotoControls';
 import ScrollGallery from './components/ScrollGallery';
@@ -98,12 +98,12 @@ const PhotoGrid = (props: PhotoGridProps) => {
             <>
               {props.isEditing && (
                 <RowControls
-                rowKey={row[0]}
-                moveRowUp={handleMoveRowUp}
-                moveRowDown={handleMoveRowDown}
-                rowCount={Object.keys(props.rows).length}
-                buttonArrows={props.buttonArrows}
-              />
+                  rowKey={row[0]}
+                  moveRowUp={handleMoveRowUp}
+                  moveRowDown={handleMoveRowDown}
+                  rowCount={Object.keys(props.rows).length}
+                  buttonArrows={props.buttonArrows}
+                />
               )}
               {sortRow(row[1]).map((photo, i2) =>
                 <div
@@ -118,6 +118,7 @@ const PhotoGrid = (props: PhotoGridProps) => {
                     alt={photo.thumbnail_path}
                     onClick={onPhotoClick}
                     className={props.useGallery ? "cursor-pointer" : 'cursor-default'}
+                    onContextMenu={disableRightClick}
                   />
 
                   {!props.isEditing && photoHasDetails(photo) === true && (
@@ -137,7 +138,7 @@ const PhotoGrid = (props: PhotoGridProps) => {
                         cloneElement(props.photoMenu, {
                           photo: photo
                         })
-                      : null}
+                        : null}
                       <PhotoControls
                         rowKey={row[0]}
                         photo={photo}
